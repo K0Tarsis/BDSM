@@ -27,15 +27,24 @@ class Parser:
             else:
                 country = "None"
 
+        for tr in tr_list:
+            if "Время" in tr.text:
+                duration = tr.find_all('td')[-1].text.rstrip().lstrip()
+                break
+            else:
+                duration = "None"
+
         description = contant_main.find(class_="b-post__description_text").text.rstrip().lstrip()
 
         content = {"Title": [title],
                    "Original_title": [original_title],
                    "IMDB": [imdb],
                    "Country": [country],
+                   "Duration": [duration],
                    "Description": [description]}
 
         self.content = content
+        print(content)
         return content
 
     def write_to_csv(self, name):
