@@ -44,7 +44,6 @@ class Parser:
                    "Description": [description]}
 
         self.content = content
-        print(content)
         return content
 
     def write_to_csv(self, name):
