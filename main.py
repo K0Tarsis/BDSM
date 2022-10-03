@@ -15,9 +15,9 @@ class Parser:
         src = req.text
         soup = BeautifulSoup(src, 'lxml')
         contant_main = soup.find(class_="b-content__main")
-        title = contant_main.find(class_="b-post__title").text.rstrip().lstrip()
-        original_title = contant_main.find(class_="b-post__origtitle").text.rstrip().lstrip()
-        imdb = contant_main.find(class_="b-post__info_rates imdb").find('span').text.rstrip().lstrip()
+        title = contant_main.find(class_="b-post__title").text.strip()
+        original_title = contant_main.find(class_="b-post__origtitle").text.strip()
+        imdb = contant_main.find(class_="b-post__info_rates imdb").find('span').text.strip()
         tr_list = contant_main.find_all("tr")
 
         for tr in tr_list:
@@ -29,12 +29,12 @@ class Parser:
 
         for tr in tr_list:
             if "Время" in tr.text:
-                duration = tr.find_all('td')[-1].text.rstrip().lstrip()
+                duration = tr.find_all('td')[-1].text.strip()
                 break
             else:
                 duration = "None"
 
-        description = contant_main.find(class_="b-post__description_text").text.rstrip().lstrip()
+        description = contant_main.find(class_="b-post__description_text").text.strip()
 
         content = {"Title": [title],
                    "Original_title": [original_title],
